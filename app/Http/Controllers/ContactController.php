@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Questions;
-
-class QuestionsController extends Controller
+use App\Models\Contact;
+class ContactController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +13,9 @@ class QuestionsController extends Controller
      */
     public function index()
     {
-        $questions = Questions::all();
-        return view('questions.index',compact('questions'));
+        $contact = Contact::first();
+        dd($contact);
+        return view('contact.index',compact('contact'));
     }
 
     /**
@@ -25,7 +25,7 @@ class QuestionsController extends Controller
      */
     public function create()
     {
-        return view('questions.create');
+        //
     }
 
     /**
@@ -36,17 +36,7 @@ class QuestionsController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'questions' => 'required|unique:questions',
-            'answer' => 'required',
-        ]);
-
-        Questions::create([
-            'questions' => $request->questions,
-            'answer'    => $request->answer
-        ]);
-
-        return redirect()->route('questions.index');
+        //
     }
 
     /**
@@ -68,8 +58,7 @@ class QuestionsController extends Controller
      */
     public function edit($id)
     {
-        $question = Questions::find($id);
-        return view('questions.edit',compact('question'));
+        //
     }
 
     /**
@@ -81,17 +70,7 @@ class QuestionsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validated = $request->validate([
-            'questions' => 'required|unique:questions',
-            'answer' => 'required',
-        ]);
-
-        Questions::find($id)->update([
-            'questions' => $request->questions,
-            'answer'    => $request->answer
-        ]);
-
-        return redirect()->route('questions.index');
+        //
     }
 
     /**
@@ -102,7 +81,6 @@ class QuestionsController extends Controller
      */
     public function destroy($id)
     {
-        Questions::find($id)->delete();
-        return redirect()->route('questions.index');
+        //
     }
 }

@@ -22,11 +22,17 @@
     <!-- jvectormap -->
     <link rel="stylesheet" href="{{ asset('assets/bower_components/jvectormap/jquery-jvectormap.css') }}">
     <!-- Date Picker -->
-    <link rel="stylesheet" href="{{ asset('assets/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}">
+    <link rel="stylesheet"
+        href="{{ asset('assets/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}">
     <!-- Daterange picker -->
     <link rel="stylesheet" href="{{ asset('assets/bower_components/bootstrap-daterangepicker/daterangepicker.css') }}">
     <!-- bootstrap wysihtml5 - text editor -->
     <link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}">
+
+    <link rel="stylesheet"
+        href="{{ asset('assets/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
 
     <!-- Google Font -->
     <link rel="stylesheet"
@@ -35,13 +41,13 @@
 
 <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
-        
+
         @include('layouts.navbar')
         @include('layouts.sidebar')
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
-           @yield('content')
+            @yield('content')
         </div>
         <!-- /.content-wrapper -->
         <footer class="main-footer">
@@ -49,7 +55,7 @@
                 <b>Version</b> 2.4.13
             </div>
             <strong>Copyright &copy; <?=Date('Y')?> . All rights
-            reserved.
+                reserved.
         </footer>
     </div>
     <!-- ./wrapper -->
@@ -61,6 +67,7 @@
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
         $.widget.bridge('uibutton', $.ui.button);
+
     </script>
     <!-- Bootstrap 3.3.7 -->
     <script src="{{ asset('assets/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
@@ -78,7 +85,8 @@
     <script src="{{ asset('assets/bower_components/moment/min/moment.min.js') }}"></script>
     <script src="{{ asset('assets/bower_components/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
     <!-- datepicker -->
-    <script src="{{ asset('assets/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
+    <script src="{{ asset('assets/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}">
+    </script>
     <!-- Bootstrap WYSIHTML5 -->
     <script src="{{ asset('assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') }}"></script>
     <!-- Slimscroll -->
@@ -91,6 +99,43 @@
     <script src="{{ asset('assets/dist/js/pages/dashboard.js') }}"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="{{ asset('assets/dist/js/demo.js') }}"></script>
+
+    <script src="{{ asset('assets/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
+
+    <script src="{{ asset('assets/bower_components/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
+
+    <script src="{{ asset('assets/bower_components/fastclick/lib/fastclick.js') }}"></script>
+
+    <script src="{{ asset('assets/dist/js/adminlte.min.js') }}"></script>
+
+    <script src="{{ asset('assets/dist/js/demo.js') }}"></script>
+
+    <script>
+        $(function () {
+            $('#example1').DataTable()
+            $('#example2').DataTable({
+                'paging': true,
+                'lengthChange': false,
+                'searching': false,
+                'ordering': true,
+                'info': true,
+                'autoWidth': false
+            })
+        })
+
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    @if($errors->any())
+    <script>
+        toastr.error('{{ $errors->first() }}', 'Xatolik', {
+            positionClass: 'toast-bottom-right'
+        });
+    </script>
+    @endif
+
 </body>
 
 </html>

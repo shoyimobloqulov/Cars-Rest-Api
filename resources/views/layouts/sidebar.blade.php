@@ -27,6 +27,34 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">MAIN NAVIGATION</li>
+
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-dashboard"></i> <span>Hero</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{route('hero.create')}}"><i class="fa fa-circle-o"></i>Qo'shish</a></li>
+                    <li class=""><a href="{{route('hero.index')}}"><i class="fa fa-circle-o"></i> Ko'rish</a></li>
+                </ul>
+            </li>
+
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-dashboard"></i> <span>Questions</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{route('questions.create')}}"><i class="fa fa-circle-o"></i>Qo'shish</a></li>
+                    <li class=""><a href="{{route('questions.index')}}"><i class="fa fa-circle-o"></i> Ko'rish</a></li>
+                </ul>
+            </li>
+
+            <li><a href="{{route('contact.index')}}"><i class="fa fa-book"></i> <span>Contact</span></a></li>
         </ul>
     </section>
     <!-- /.sidebar -->
