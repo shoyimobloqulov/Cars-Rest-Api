@@ -67,8 +67,11 @@
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
         $.widget.bridge('uibutton', $.ui.button);
-
     </script>
+    <script src="{{ asset('assets/plugins/input-mask/jquery.inputmask.js') }} "></script>
+    <script src="{{ asset('assets/plugins/input-mask/jquery.inputmask.date.extensions.js') }} "></script>
+    <script src="{{ asset('assets/plugins/input-mask/jquery.inputmask.extensions.js') }} "></script>
+    
     <!-- Bootstrap 3.3.7 -->
     <script src="{{ asset('assets/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
     <!-- Morris.js charts -->
@@ -121,7 +124,15 @@
                 'ordering': true,
                 'info': true,
                 'autoWidth': false
-            })
+            });
+
+            $('[data-mask]').inputmask();
+
+
+            //Date picker
+            $('#datepicker').datepicker({
+                autoclose: true
+            });
         })
 
     </script>
@@ -133,6 +144,7 @@
         toastr.error('{{ $errors->first() }}', 'Xatolik', {
             positionClass: 'toast-bottom-right'
         });
+
     </script>
     @endif
 

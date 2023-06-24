@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Contact;
+use App\Models\Logo;
 use Illuminate\Support\Facades\File;
-class ContactController extends Controller
+
+class LogoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,13 +15,8 @@ class ContactController extends Controller
      */
     public function index()
     {
-        $contact = Contact::all();
-        if(count($contact) == 0){
-            Contact::create([]);
-        }
-
-        $contact = Contact::first();
-        return view('contact.index',compact('contact'));
+        $logo = Logo::all();
+        return view('logo.index',compact('logo'));
     }
 
     /**
@@ -30,7 +26,7 @@ class ContactController extends Controller
      */
     public function create()
     {
-        //
+        return view('logo.create');
     }
 
     /**
@@ -41,7 +37,28 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'logo' =>  'image|mimes:jpeg,png,jpg,gif',
+        ]);
+
+        
+        $rasmNomi = "";
+
+        if ($request->hasFile('logo')) {
+            $rasm = $request->file('logo');
+
+            // Rasm nomini generatsiya qilish
+            $rasmNomi = 'logo-'.time().'.'.$rasm->getClientOriginalExtension();
+
+            // Rasmni saqlash
+            $rasm->move(public_path('/logo-image'), $rasmNomi);
+        }
+
+        Logo::create([
+            'logo' => $rasmNomi
+        ]);
+
+        return redirect()->route('logo.index');
     }
 
     /**
@@ -63,7 +80,8 @@ class ContactController extends Controller
      */
     public function edit($id)
     {
-        //
+        $logo = Logo::find($id);
+        return view('logo.edit',compact('logo'));
     }
 
     /**
@@ -76,28 +94,17 @@ class ContactController extends Controller
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
-            'desc' => 'required',
-            'call' => 'required',
-            'mc'   => 'required',
-            'dot' => 'required',
-            'location' => 'required',
-            'facebook_link'   => 'required',
-            'instagram_link' => 'required',
-            'telegram_link' => 'required',
-            'linkedin_link'   => 'required',
-            'twitter_link'   => 'required',
-            'youtube_link'   => 'required',
-            'copyright_name'   => 'required',
-            'logo' => 'image|mimes:jpeg,png,jpg,gif',
+            'logo' =>  'image|mimes:jpeg,png,jpg,gif',
         ]);
 
-        $rasmUrl = public_path('/' . Contact::find($id)->logo);
+        
+        $rasmNomi = "";
+
+        $rasmUrl = public_path('/logo-image' . Logo::find($id)->logo);
 
         if (File::exists($rasmUrl)) {
             File::delete($rasmUrl);
         }
-
-        $rasmNomi = "";
 
         if ($request->hasFile('logo')) {
             $rasm = $request->file('logo');
@@ -106,27 +113,14 @@ class ContactController extends Controller
             $rasmNomi = 'logo-'.time().'.'.$rasm->getClientOriginalExtension();
 
             // Rasmni saqlash
-            $rasm->move(public_path('/'), $rasmNomi);
+            $rasm->move(public_path('/logo-image'), $rasmNomi);
         }
 
-        $contact = Contact::find($id);
-        $contact->logo = $rasmNomi;
-        $contact->desc = $request->desc;
-        $contact->call = $request->call;
-        $contact->mc   = $request->mc;
-        $contact->dot = $request->dot;
-        $contact->location = $request->location;
-        $contact->facebook_link   = $request->facebook_link;
-        $contact->instagram_link = $request->instagram_link;
-        $contact->telegram_link = $request->telegram_link;
-        $contact->linkedin_link   = $request->linkedin_link;
-        $contact->twitter_link   = $request->twitter_link;
-        $contact->youtube_link   = $request->youtube_link;
-        $contact->copyright_name   = $request->copyright_name;
+        Logo::find($id)->update([
+            'logo' => $rasmNomi
+        ]);
 
-        $contact->save();
-    
-        return redirect()->route('contact.index');
+        return redirect()->route('logo.index');
     }
 
     /**
@@ -137,6 +131,7 @@ class ContactController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Logo::find($id)->delete();
+        return redirect()->route('logo.index');
     }
 }
