@@ -15,7 +15,7 @@
 
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
-                
+
                 <!-- User Account: style can be found in dropdown.less -->
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -25,13 +25,26 @@
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
-                            <img src="{{asset('assets/dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
+                            <img src="{{asset('assets/dist/img/user2-160x160.jpg')}}" class="img-circle"
+                                alt="User Image">
 
                             <p>
                                 {{auth()->user()->name}} - Web Developer
                             </p>
                         </li>
-                        
+
+                        <li class="user-footer">
+                            <div class="pull-left">
+                                {{-- <a href="#" class="btn btn-default btn-flat">Profile</a> --}}
+                            </div>
+                            <div class="pull-right">
+                                <form action="{{route('logout')}}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="btn btn-default btn-flat">Sign out</button>
+                                </form>
+                            </div>
+                        </li>
+
                     </ul>
                 </li>
             </ul>

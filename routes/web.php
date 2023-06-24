@@ -9,6 +9,7 @@ use App\Http\Controllers\LogoController;
 use App\Http\Controllers\ReasonsController;
 use App\Http\Controllers\StoriesController;
 use App\Http\Controllers\StatisticsController;
+use App\Http\Controllers\CompaniesController;
 
 Auth::routes([
     'register' => true
@@ -17,6 +18,7 @@ Auth::routes([
 
 Route::group(['middleware' => ['auth']], function() {
     Route::get('/',[HomeController::class,'index'])->name('home');
+    Route::get('/home',[HomeController::class,'index']);
     Route::resource('hero', HeroController::class);
     Route::resource('questions', QuestionsController::class);
     Route::resource('contact', ContactController::class);
@@ -24,5 +26,6 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('reasons', ReasonsController::class);
     Route::resource('stories', StoriesController::class);
     Route::resource('statistics', StatisticsController::class);
+    Route::resource('companies', CompaniesController::class);
 });
 
