@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Companies extends Model
 {
     use HasFactory;
+    public $fillable = ['name','rate','desc','date','logo'];
 }
