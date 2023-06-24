@@ -67,11 +67,12 @@
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
         $.widget.bridge('uibutton', $.ui.button);
+
     </script>
     <script src="{{ asset('assets/plugins/input-mask/jquery.inputmask.js') }} "></script>
     <script src="{{ asset('assets/plugins/input-mask/jquery.inputmask.date.extensions.js') }} "></script>
     <script src="{{ asset('assets/plugins/input-mask/jquery.inputmask.extensions.js') }} "></script>
-    
+
     <!-- Bootstrap 3.3.7 -->
     <script src="{{ asset('assets/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
     <!-- Morris.js charts -->
@@ -133,6 +134,17 @@
             $('#datepicker').datepicker({
                 autoclose: true
             });
+        })
+
+    </script>
+
+    <script src="{{asset('assets/bower_components/ckeditor/ckeditor.js')}}"></script>
+
+    <script src="{{asset('assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js')}}"></script>
+    <script>
+        $(function () {
+            CKEDITOR.replace('editor1')
+            $('.textarea').wysihtml5()
         })
 
     </script>

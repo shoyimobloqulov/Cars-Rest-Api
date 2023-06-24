@@ -14,8 +14,8 @@ class ReasonsController extends Controller
      */
     public function index()
     {
-        $questions = Hero::all();
-        return view('hero.index',compact('questions'));
+        $reasons = Reasons::all();
+        return view('reasons.index',compact('reasons'));
     }
 
     /**
@@ -25,7 +25,7 @@ class ReasonsController extends Controller
      */
     public function create()
     {
-        return view('hero.create');
+        return view('reasons.create');
     }
 
     /**
@@ -39,7 +39,6 @@ class ReasonsController extends Controller
         $validated = $request->validate([
             'title' => 'required',
             'desc' => 'required',
-            'url'   => 'required',
             'file' => 'image|mimes:jpeg,png,jpg,gif',
         ]);
 
@@ -52,17 +51,16 @@ class ReasonsController extends Controller
             $rasmNomi = time().'.'.$rasm->getClientOriginalExtension();
 
             // Rasmni saqlash
-            $rasm->move(public_path('hero-image'), $rasmNomi);
+            $rasm->move(public_path('reasons-image'), $rasmNomi);
         }
 
-        Hero::create([
+        Reasons::create([
             'title'     => $request->title,
             'desc'      => $request->desc,
-            'url'     => $request->url,
-            'image'     => $rasmNomi
+            'logo'     => $rasmNomi
         ]);
 
-        return redirect()->route('hero.index');
+        return redirect()->route('reasons.index');
     }
 
     /**
@@ -84,8 +82,8 @@ class ReasonsController extends Controller
      */
     public function edit($id)
     {
-        $question = Hero::find($id);
-        return view('hero.edit',compact('question'));
+        $reasons = Reasons::find($id);
+        return view('reasons.edit',compact('reasons'));
     }
 
     /**
@@ -101,15 +99,15 @@ class ReasonsController extends Controller
         $validated = $request->validate([
             'title' => 'required',
             'desc' => 'required',
-            'url'   => 'required',
             'file' => 'image|mimes:jpeg,png,jpg,gif',
         ]);
 
-        $rasmUrl = public_path('hero-image/' . Hero::find($id)->image);
+        $rasmUrl = public_path('reasons-image/' . Reasons::find($id)->image);
 
         if (File::exists($rasmUrl)) {
             File::delete($rasmUrl);
         }
+
 
         $rasmNomi = "";
 
@@ -120,17 +118,16 @@ class ReasonsController extends Controller
             $rasmNomi = time().'.'.$rasm->getClientOriginalExtension();
 
             // Rasmni saqlash
-            $rasm->move(public_path('hero-image'), $rasmNomi);
+            $rasm->move(public_path('reasons-image'), $rasmNomi);
         }
 
-        Hero::find($id)->update([
+        Reasons::find($id)->update([
             'title'     => $request->title,
             'desc'      => $request->desc,
-            'url'     => $request->url,
-            'image'     => $rasmNomi
+            'logo'     => $rasmNomi
         ]);
 
-        return redirect()->route('hero.index');
+        return redirect()->route('reasons.index');
     }
 
     /**
@@ -141,7 +138,7 @@ class ReasonsController extends Controller
      */
     public function destroy($id)
     {
-        Hero::find($id)->delete();
-        return redirect()->route('hero.index');
+        Reasons::find($id)->delete();
+        return redirect()->route('reasons.index');
     }
 }

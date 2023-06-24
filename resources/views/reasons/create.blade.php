@@ -2,11 +2,11 @@
 @section('content')
 <section class="content-header">
     <h1>
-        Hero Add
+        Reasons Add
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li>Hero</li>
+        <li>Reasons</li>
         <li class="active">Add</li>
     </ol>
 </section>
@@ -17,7 +17,7 @@
         <div class="col-md-6">
 
             <div class="box box-primary">
-                <form role="form" action="{{route('hero.store')}}" method="POST" enctype="multipart/form-data">
+                <form role="form" action="{{route('reasons.store')}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="box-body">
                         <div class="form-group">
@@ -27,12 +27,7 @@
 
                         <div class="form-group">
                             <label for="Desc">Desc</label>
-                            <input type="text" class="form-control" id="Desc" name="desc" placeholder="Enter Desc">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="Url">Url</label>
-                            <input type="text" class="form-control" id="Url" name="url" placeholder="Enter Url" >
+                            <textarea id="editor1" rows="10" cols="80" name="desc"></textarea>
                         </div>
 
                         <div class="form-group">

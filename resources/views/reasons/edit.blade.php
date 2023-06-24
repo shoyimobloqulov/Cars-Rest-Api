@@ -17,23 +17,18 @@
         <div class="col-md-6">
 
             <div class="box box-primary">
-                <form role="form" action="{{route('hero.update',$question->id)}}" method="POST" enctype="multipart/form-data">
+                <form role="form" action="{{route('reasons.update',$reasons->id)}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="box-body">
                         <div class="form-group">
                             <label for="Title">Title</label>
-                            <input type="text" class="form-control" id="Title" name="title" placeholder="Enter Title" value="{{$question->title}}">
+                            <input type="text" class="form-control" id="Title" name="title" placeholder="Enter Title" value="{{$reasons->title}}">
                         </div>
 
                         <div class="form-group">
                             <label for="Desc">Desc</label>
-                            <input type="text" class="form-control" id="Desc" name="desc" placeholder="Enter Desc" value="{{$question->desc}}">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="Url">Url</label>
-                            <input type="text" class="form-control" id="Url" name="url" placeholder="Enter Url" value="{{$question->url}}">
+                            <textarea id="editor1" rows="10" cols="80" name="desc">{{$reasons->desc}}</textarea>
                         </div>
 
                         <div class="form-group">

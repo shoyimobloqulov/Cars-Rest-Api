@@ -2,7 +2,7 @@
 @section('content')
 <section class="content-header">
     <h1>
-        Hero
+        Reasons
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -15,7 +15,7 @@
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-header">
-                    <a class="btn btn-success" href="{{ route('hero.create') }}"><i class="fa fa-plus"></i> Qo'shish</a>
+                    <a class="btn btn-success" href="{{ route('reasons.create') }}"><i class="fa fa-plus"></i> Qo'shish</a>
                 </div>
                 <div class="box-body">
                     <table id="example2" class="table table-bordered table-hover">
@@ -24,33 +24,31 @@
                                 <th>#</th>
                                 <th>Title</th>
                                 <th>Desc</th>
-                                <th>Image</th>
-                                <th>Url</th>
-                                <th>Actions</th>
+                                <th>Logo</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             @php
                             $id = 1
                             @endphp
-                            @foreach ($questions as $q)
+                            @foreach ($reasons as $q)
                             <tr>
                                 <td>{{$id}}</td>
                                 <td>{{ $q['title'] }}</td>
                                 <td>{{ $q['desc'] }}</td>
                                 <td>
-                                    <img src="{{asset('hero-image/'.$q['image'].'')}}" alt="" width="90">
+                                    <img src="{{asset('reasons-image/'.$q['logo'].'')}}" alt="" width="90">
                                 </td>
-                                <td>{{ $q['url'] }}</td>
                                 <td>
                                     <div class="btn-group">
-                                        <form action="{{ route('hero.destroy',$q->id) }}" method="post">
+                                        <form action="{{ route('reasons.destroy',$q->id) }}" method="post">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger">
                                                 <i class="fa fa-trash-o"></i>
                                             </button>
-                                            <a class="btn btn-info" href="{{ route('hero.edit',$q->id) }}">
+                                            <a class="btn btn-info" href="{{ route('reasons.edit',$q->id) }}">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         </form>
