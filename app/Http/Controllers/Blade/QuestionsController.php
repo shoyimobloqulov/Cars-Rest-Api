@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Blade;
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Models\Questions;
+use Illuminate\Http\Request;
 
 class QuestionsController extends Controller
 {

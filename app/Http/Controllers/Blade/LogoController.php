@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Blade;
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Models\Logo;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
 class LogoController extends Controller
@@ -41,7 +42,7 @@ class LogoController extends Controller
             'logo' =>  'image|mimes:jpeg,png,jpg,gif',
         ]);
 
-        
+
         $rasmNomi = "";
 
         if ($request->hasFile('logo')) {
@@ -97,7 +98,7 @@ class LogoController extends Controller
             'logo' =>  'image|mimes:jpeg,png,jpg,gif',
         ]);
 
-        
+
         $rasmNomi = "";
 
         $rasmUrl = public_path('/logo-image' . Logo::find($id)->logo);

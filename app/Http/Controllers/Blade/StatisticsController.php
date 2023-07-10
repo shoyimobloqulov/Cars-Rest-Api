@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Blade;
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\DB;
 use App\Models\Statistics;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
 class StatisticsController extends Controller
@@ -98,7 +100,7 @@ class StatisticsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+
         $validated = $request->validate([
             'company_name' => 'required',
             'rate' => 'required',

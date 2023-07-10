@@ -119,6 +119,19 @@
                 </ul>
             </li>
 
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-dashboard"></i> <span>Booking</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{route('booking.create')}}"><i class="fa fa-circle-o"></i>Qo'shish</a></li>
+                    <li class=""><a href="{{route('booking.index')}}"><i class="fa fa-circle-o"></i> Ko'rish</a></li>
+                </ul>
+            </li>
+
             <li><a href="{{route('contact.index')}}"><i class="fa fa-book"></i> <span>Contact</span></a></li>
         </ul>
     </section>

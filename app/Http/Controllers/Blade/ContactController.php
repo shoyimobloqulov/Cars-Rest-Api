@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Blade;
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Models\Contact;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+
 class ContactController extends Controller
 {
     /**
@@ -125,7 +127,7 @@ class ContactController extends Controller
         $contact->copyright_name   = $request->copyright_name;
 
         $contact->save();
-    
+
         return redirect()->route('contact.index');
     }
 

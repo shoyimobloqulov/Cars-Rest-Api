@@ -1,16 +1,17 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Blade\BookingController;
+use App\Http\Controllers\Blade\CompaniesController;
+use App\Http\Controllers\Blade\ContactController;
+use App\Http\Controllers\Blade\HeroController;
+use App\Http\Controllers\Blade\LogoController;
+use App\Http\Controllers\Blade\QuestionsController;
+use App\Http\Controllers\Blade\StatisticsController;
+use App\Http\Controllers\Blade\StoriesController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\HeroController;
-use App\Http\Controllers\QuestionsController;
-use App\Http\Controllers\ContactController;
-use App\Http\Controllers\LogoController;
 use App\Http\Controllers\ReasonsController;
-use App\Http\Controllers\StoriesController;
-use App\Http\Controllers\StatisticsController;
-use App\Http\Controllers\CompaniesController;
-use App\Http\Controllers\ApiUserController;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 Auth::routes([
     'register' => true
@@ -27,14 +28,6 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('stories', StoriesController::class);
     Route::resource('statistics', StatisticsController::class);
     Route::resource('companies', CompaniesController::class);
-
-    Route::get('/api-users',[ApiUserController::class,'index'])->name('api-userIndex');
-    Route::get('/api-user/add',[ApiUserController::class,'add'])->name('api-userAdd');
-    Route::post('/api-user/create',[ApiUserController::class,'create'])->name('api-userCreate');
-    Route::get('/api-user/show/{id}',[ApiUserController::class,'show'])->name('api-userShow');
-    Route::get('/api-user/{id}/edit',[ApiUserController::class,'edit'])->name('api-userEdit');
-    Route::post('/api-user/update/{id}',[ApiUserController::class,'update'])->name('api-userUpdate');
-    Route::delete('/api-user/delete/{id}',[ApiUserController::class,'destroy'])->name('api-userDestroy');
-    Route::delete('/api-user-token/delete/{id}',[ApiUserController::class,'destroyToken'])->name('api-tokenDestroy');
+    Route::resource('booking', BookingController::class);
 });
 

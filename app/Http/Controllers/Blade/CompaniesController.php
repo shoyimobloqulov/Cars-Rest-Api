@@ -1,10 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Blade;
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\DB;
 use App\Models\Companies;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+
 class CompaniesController extends Controller
 {
     /**
@@ -99,7 +102,7 @@ class CompaniesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+
         $validated = $request->validate([
             'name' => 'required',
             'rate' => 'required',

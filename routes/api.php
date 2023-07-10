@@ -1,9 +1,10 @@
 <?php
 
+use App\Http\Controllers\Api\BookingController;
+use App\Http\Controllers\Api\CompaniesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ApiAuthController;
-use App\Http\Controllers\ApiUserController;
+use App\Http\Controllers\Api\HeroController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,22 +21,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-# Api Clients
-Route::post('/login',[ApiAuthController::class,'login']);
-
-Route::group(['middleware' => 'api-auth'],function (){
-    Route::post('/me',[ApiAuthController::class,'me']);
-    Route::post('/tokens',[ApiAuthController::class,'getAllTokens']);
-    Route::post('/logout',[ApiAuthController::class,'logout']);
-});
-
-
-Route::group(['middleware' => 'ajax.check'],function (){
-    Route::post('/api-user/toggle-status/{user_id}',[ApiUserController::class,'toggleUserActivation']);
-    Route::post('/api-token/toggle-status/{token_id}',[ApiUserController::class,'toggleTokenActivation']);
-});
-
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+# Api Clients
+Route::get('/hero',[HeroController::class,'index']);
+Route::get('/companies',[CompaniesController::class,'index']);
+Route::get('/booking',[BookingController::class,'index']);

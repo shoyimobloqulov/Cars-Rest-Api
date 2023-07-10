@@ -1,11 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Blade;
 
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\Reasons;
+use App\Models\Stories;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
-use App\Models\Hero;
-class HeroController extends Controller
+
+class StoriesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +18,8 @@ class HeroController extends Controller
      */
     public function index()
     {
-        $questions = Hero::all();
-        return view('hero.index',compact('questions'));
+        $stories = Stories::all();
+        return view('stories.index',compact('stories'));
     }
 
     /**
@@ -25,7 +29,7 @@ class HeroController extends Controller
      */
     public function create()
     {
-        return view('hero.create');
+        return view('stories.create');
     }
 
     /**
@@ -39,7 +43,7 @@ class HeroController extends Controller
         $validated = $request->validate([
             'title' => 'required',
             'desc' => 'required',
-            'url'   => 'required',
+            'date' => 'required',
             'file' => 'image|mimes:jpeg,png,jpg,gif',
         ]);
 
@@ -52,17 +56,17 @@ class HeroController extends Controller
             $rasmNomi = time().'.'.$rasm->getClientOriginalExtension();
 
             // Rasmni saqlash
-            $rasm->move(public_path('hero-image'), $rasmNomi);
+            $rasm->move(public_path('stories-image'), $rasmNomi);
         }
 
-        Hero::create([
+        Stories::create([
             'title'     => $request->title,
             'desc'      => $request->desc,
-            'url'     => $request->url,
+            'data'      => $request->date,
             'image'     => $rasmNomi
         ]);
 
-        return redirect()->route('hero.index');
+        return redirect()->route('stories.index');
     }
 
     /**
@@ -84,8 +88,8 @@ class HeroController extends Controller
      */
     public function edit($id)
     {
-        $question = Hero::find($id);
-        return view('hero.edit',compact('question'));
+        $stories = Stories::find($id);
+        return view('stories.edit',compact('stories'));
     }
 
     /**
@@ -97,21 +101,22 @@ class HeroController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+
         $validated = $request->validate([
             'title' => 'required',
             'desc' => 'required',
-            'url'   => 'required',
+            'date' => 'required',
             'file' => 'image|mimes:jpeg,png,jpg,gif',
         ]);
 
-        $rasmUrl = public_path('hero-image/' . Hero::find($id)->image);
+        $rasmNomi = "";
+
+        $rasmUrl = public_path('stories-image/' . Hero::find($id)->image);
 
         if (File::exists($rasmUrl)) {
             File::delete($rasmUrl);
         }
 
-        $rasmNomi = "";
 
         if ($request->hasFile('file')) {
             $rasm = $request->file('file');
@@ -120,17 +125,17 @@ class HeroController extends Controller
             $rasmNomi = time().'.'.$rasm->getClientOriginalExtension();
 
             // Rasmni saqlash
-            $rasm->move(public_path('hero-image'), $rasmNomi);
+            $rasm->move(public_path('stories-image'), $rasmNomi);
         }
 
-        Hero::find($id)->update([
+        Stories::find($id)->update([
             'title'     => $request->title,
             'desc'      => $request->desc,
-            'url'     => $request->url,
+            'data'      => $request->date,
             'image'     => $rasmNomi
         ]);
 
-        return redirect()->route('hero.index');
+        return redirect()->route('stories.index');
     }
 
     /**
@@ -141,7 +146,20 @@ class HeroController extends Controller
      */
     public function destroy($id)
     {
-        Hero::find($id)->delete();
-        return redirect()->route('hero.index');
+        Reasons::find($id)->delete();
+        return redirect()->route('reasons.index');
     }
+
+    public function getPaginatedData(Request $request)
+    {
+        $paginationCount = $request->input('pagination_count', 10);
+        $pageNumber = $request->input('page_number', 1);
+
+        // Ma'lumotlarni olish
+        $data = DB::table('stories')->paginate($paginationCount, ['*'], 'page', $pageNumber);
+
+        // Paginatsiya ma'lumotlarni JSON formatida qaytarish
+        return response()->json($data);
+    }
+
 }
