@@ -99,7 +99,7 @@
                     <span class="pull-right-container">
                         <i class="fa fa-angle-left pull-right"></i>
                     </span>
-                </a>
+                </a>s
                 <ul class="treeview-menu">
                     <li><a href="{{route('statistics.create')}}"><i class="fa fa-circle-o"></i>Qo'shish</a></li>
                     <li class=""><a href="{{route('statistics.index')}}"><i class="fa fa-circle-o"></i> Ko'rish</a></li>
