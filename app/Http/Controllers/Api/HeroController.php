@@ -16,6 +16,7 @@ class HeroController extends Controller
             ->where('url','=',$url)
             ->first();
         return response()->json([
+            "image_url: "   => asset('hero-image/'),
             'success'   => 1,
             'data'      => $hero
         ],201);

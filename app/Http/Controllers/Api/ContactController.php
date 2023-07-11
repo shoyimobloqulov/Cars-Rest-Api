@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Booking;
+use App\Models\Contact;
 use Illuminate\Http\Request;
 
-class BookingController extends Controller
+class ContactController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,10 +15,11 @@ class BookingController extends Controller
      */
     public function index()
     {
-        $booking = Booking::select('solve','desc','step1','step2','step3','url')->first();
+        $contact = Contact::select('desc','call','mc','dot','location','facebook_link','instagram_link','telegram_link','linkedin_link','twitter_link','youtube_link','logo','copyright_name')->first();
         return response()->json([
+            "image_url: "   => asset('/'),
             'success' => 1,
-            'data'    => $booking
+            'data'    => $contacts
         ],201);
     }
 

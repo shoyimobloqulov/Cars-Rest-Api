@@ -3,23 +3,16 @@
 namespace App\Http\Controllers\Blade;
 
 use App\Http\Controllers\Controller;
-use App\Models\Hero;
-use App\Models\Stories;
+use App\Models\addPage;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 
-class StoriesController extends Controller
+class AddPageController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        $stories = Stories::all();
-        return view('stories.index',compact('stories'));
+        $addpage = addPage::all();
+        return view('add-page.index',compact('addpage'));
     }
 
     /**
@@ -29,7 +22,7 @@ class StoriesController extends Controller
      */
     public function create()
     {
-        return view('stories.create');
+        return view('add-page.create');
     }
 
     /**
@@ -43,7 +36,7 @@ class StoriesController extends Controller
         $validated = $request->validate([
             'title' => 'required',
             'desc' => 'required',
-            'date' => 'required',
+            'url'   => 'required',
             'file' => 'image|mimes:jpeg,png,jpg,gif',
         ]);
 
@@ -56,17 +49,17 @@ class StoriesController extends Controller
             $rasmNomi = time().'.'.$rasm->getClientOriginalExtension();
 
             // Rasmni saqlash
-            $rasm->move(public_path('stories-image'), $rasmNomi);
+            $rasm->move(public_path('page-image'), $rasmNomi);
         }
 
-        Stories::create([
+        addPage::create([
             'title'     => $request->title,
             'desc'      => $request->desc,
-            'data'      => $request->date,
+            'url'     => $request->url,
             'image'     => $rasmNomi
         ]);
 
-        return redirect()->route('stories.index');
+        return redirect()->route('page-body.index');
     }
 
     /**
@@ -88,8 +81,8 @@ class StoriesController extends Controller
      */
     public function edit($id)
     {
-        $stories = Stories::find($id);
-        return view('stories.edit',compact('stories'));
+        $addpage = addPage::find($id);
+        return view('add-page.edit',compact('addpage'));
     }
 
     /**
@@ -105,18 +98,17 @@ class StoriesController extends Controller
         $validated = $request->validate([
             'title' => 'required',
             'desc' => 'required',
-            'date' => 'required',
+            'url'   => 'required',
             'file' => 'image|mimes:jpeg,png,jpg,gif',
         ]);
 
-        $rasmNomi = "";
-
-        $rasmUrl = public_path('stories-image/' . Hero::find($id)->image);
+        $rasmUrl = public_path('page-image/' . addPage::find($id)->image);
 
         if (File::exists($rasmUrl)) {
             File::delete($rasmUrl);
         }
 
+        $rasmNomi = "";
 
         if ($request->hasFile('file')) {
             $rasm = $request->file('file');
@@ -125,17 +117,17 @@ class StoriesController extends Controller
             $rasmNomi = time().'.'.$rasm->getClientOriginalExtension();
 
             // Rasmni saqlash
-            $rasm->move(public_path('stories-image'), $rasmNomi);
+            $rasm->move(public_path('page-image'), $rasmNomi);
         }
 
-        Stories::find($id)->update([
+        addPage::find($id)->update([
             'title'     => $request->title,
             'desc'      => $request->desc,
-            'data'      => $request->date,
+            'url'     => $request->url,
             'image'     => $rasmNomi
         ]);
 
-        return redirect()->route('stories.index');
+        return redirect()->route('page-body.index');
     }
 
     /**
@@ -146,8 +138,7 @@ class StoriesController extends Controller
      */
     public function destroy($id)
     {
-        Stories::find($id)->delete();
-        return redirect()->route('stories.index');
+        addPage::find($id)->delete();
+        return redirect()->route('page-body.index');
     }
-
 }

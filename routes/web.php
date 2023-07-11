@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Blade\AddPageController;
 use App\Http\Controllers\Blade\BookingController;
 use App\Http\Controllers\Blade\CompaniesController;
 use App\Http\Controllers\Blade\ContactController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\Blade\QuestionsController;
 use App\Http\Controllers\Blade\ReasonsController;
 use App\Http\Controllers\Blade\StatisticsController;
 use App\Http\Controllers\Blade\StoriesController;
+use App\Http\Controllers\Blade\TransportController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -29,5 +31,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('statistics', StatisticsController::class);
     Route::resource('companies', CompaniesController::class);
     Route::resource('booking', BookingController::class);
+    Route::resource('transport', TransportController::class);
+    Route::resource('page-body', AddPageController::class);
 });
 

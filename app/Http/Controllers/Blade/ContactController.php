@@ -99,7 +99,7 @@ class ContactController extends Controller
             File::delete($rasmUrl);
         }
 
-        $rasmNomi = "";
+        $rasmNomi = Contact::find($id)->logo;
 
         if ($request->hasFile('logo')) {
             $rasm = $request->file('logo');

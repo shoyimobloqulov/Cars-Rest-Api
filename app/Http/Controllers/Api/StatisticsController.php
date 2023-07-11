@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Booking;
+use App\Models\Statistics;
 use Illuminate\Http\Request;
 
-class BookingController extends Controller
+class StatisticsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,10 +15,11 @@ class BookingController extends Controller
      */
     public function index()
     {
-        $booking = Booking::select('solve','desc','step1','step2','step3','url')->first();
+        $statistics = Statistics::select('company_name', 'company_logo', 'rate', 'review_count')->get();
         return response()->json([
+            "image_url: "   => asset('statistics-image/'),
             'success' => 1,
-            'data'    => $booking
+            'data'    => $statistics
         ],201);
     }
 

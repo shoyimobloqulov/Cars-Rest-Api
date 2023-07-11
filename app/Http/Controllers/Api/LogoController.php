@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Booking;
+use App\Models\Logo;
 use Illuminate\Http\Request;
 
-class BookingController extends Controller
+class LogoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,10 +15,11 @@ class BookingController extends Controller
      */
     public function index()
     {
-        $booking = Booking::select('solve','desc','step1','step2','step3','url')->first();
+        $logo = Logo::select('logo')->get();
         return response()->json([
+            "image_url: "   => asset('logo-image/'),
             'success' => 1,
-            'data'    => $booking
+            'data'    => $logo
         ],201);
     }
 

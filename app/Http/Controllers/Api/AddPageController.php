@@ -3,22 +3,26 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Booking;
+use App\Models\addPage;
 use Illuminate\Http\Request;
 
-class BookingController extends Controller
+class AddPageController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $booking = Booking::select('solve','desc','step1','step2','step3','url')->first();
+        $url = $request->input('url','default');
+        $addPage = addPage::where("url",$url)
+            ->select('desc','title','url','image')
+            ->get();
         return response()->json([
-            'success' => 1,
-            'data'    => $booking
+            "image_url: "   => asset('page-image/'),
+            'success'       => 1,
+            'data'          => $addPage
         ],201);
     }
 

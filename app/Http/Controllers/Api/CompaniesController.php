@@ -18,6 +18,7 @@ class CompaniesController extends Controller
         $companies = Companies::select('name','rate','desc','date','logo')
             ->get();
         return response()->json([
+            "image_url: "   => asset('logo-image/'),
             'success' => 1,
             'data'    => $companies
         ],201);
