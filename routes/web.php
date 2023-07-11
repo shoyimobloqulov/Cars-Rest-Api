@@ -6,10 +6,10 @@ use App\Http\Controllers\Blade\ContactController;
 use App\Http\Controllers\Blade\HeroController;
 use App\Http\Controllers\Blade\LogoController;
 use App\Http\Controllers\Blade\QuestionsController;
+use App\Http\Controllers\Blade\ReasonsController;
 use App\Http\Controllers\Blade\StatisticsController;
 use App\Http\Controllers\Blade\StoriesController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ReasonsController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
